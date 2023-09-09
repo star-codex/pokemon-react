@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PokemonList from './pokemonList';
 
 function App() {
-	return null;
+	const [pokemon, setPokemon] = useState(['bulbasaur', 'charmander']);
+
+	return <PokemonList pokemon={pokemon} />;
 }
 
 export default App;
