@@ -9,15 +9,20 @@ function App() {
 	);
 	const [nextPageUrl, setNextPageUrl] = useState();
 	const [prevPageUrl, setPrevPageUrl] = useState();
+	const [loading, setLoading] = useState(true);
 
 	// every time currentPageUrl changes, rerun the code inside of it; if it doesn't, do not rerender it.
 	useEffect(() => {
+		setLoading(true);
 		axios.get(currentPageUrl).then((res) => {
+			setLoading(false);
 			setNextPageUrl(res.data.next);
 			setPrevPageUrl(res.data.previous);
 			setPokemon(res.data.results.map((p) => p.name));
 		});
 	}, [currentPageUrl]);
+
+	if (loading) return 'Loading...';
 
 	return <PokemonList pokemon={pokemon} />;
 }
