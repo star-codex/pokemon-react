@@ -28,9 +28,23 @@ function App() {
 		// cancel previous requests each time a new one is made so old data is not returned after a new request
 	}, [currentPageUrl]);
 
+	// pagination
+	function gotoNextPage() {
+		setCurrentPageUrl(nextPageUrl);
+	}
+
+	function gotoPrevPage() {
+		setCurrentPageUrl(prevPageUrl);
+	}
+
 	if (loading) return 'Loading...';
 
-	return <PokemonList pokemon={pokemon} />;
+	return (
+		<>
+			<PokemonList pokemon={pokemon} />
+			<Pagination gotoNextPage={gotoNextPage} gotoPrevPage={gotoPrevPage} />
+		</>
+	);
 }
 
 export default App;
